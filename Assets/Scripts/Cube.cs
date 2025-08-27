@@ -9,7 +9,7 @@ public class Cube : MonoBehaviour
     public Vector3 Position { get; private set; }
     public Vector3 Scale { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         _renderer = GetComponent<Renderer>();
         _renderer.material.color = Random.ColorHSV();

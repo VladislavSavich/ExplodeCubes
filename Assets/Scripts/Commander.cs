@@ -14,15 +14,15 @@ public class Commander : MonoBehaviour
 
     private void OnEnable()
     {
-        _rayCaster.CubeHitted += CheckSplitChance;
+        _rayCaster.CubeHitted += TrySplit;
     }
 
     private void OnDisable()
     {
-        _rayCaster.CubeHitted -= CheckSplitChance;
+        _rayCaster.CubeHitted -= TrySplit;
     }
 
-    private void CheckSplitChance(Cube cube)
+    private void TrySplit(Cube cube)
     {
         _valueDisappearingChance = Random.Range(_minValueChance, _maxValueChance);
 
@@ -30,11 +30,9 @@ public class Commander : MonoBehaviour
         {
             _spawner.SpawnCubes();
             cube.SplitChanceReduce();
-        }
-        else
-        {
-            Destroy(cube.gameObject);
             _exploder.Explode(_spawner.GetExplodableObjects());
         }
+
+        Destroy(cube.gameObject);
     }
 }
