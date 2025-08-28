@@ -8,7 +8,6 @@ public class Commander : MonoBehaviour
     [SerializeField] private RayCaster _rayCaster;
     [SerializeField] private Spawner _spawner;
     private float _valueDisappearingChance;
-    private float _valueExplodeChance;
     private int _maxValueChance = 101;
     private int _minValueChance = 0;
     public event Action CubeSplitted;
@@ -26,14 +25,11 @@ public class Commander : MonoBehaviour
     private void DivideCube(Cube cube)
     {
         _valueDisappearingChance = Random.Range(_minValueChance, _maxValueChance);
-        _valueExplodeChance = Random.Range(_minValueChance, _maxValueChance);
 
         if (_valueDisappearingChance <= cube.ValueSplitChance)
         {
-            _spawner.SpawnCubes();
-
-            if (_valueExplodeChance <= cube.ValueExplodeChance)
-                _exploder.Explode(_spawner.GetExplodableObjects());
+            _spawner.SpawnCubes(cube);
+            _exploder.Explode(_spawner.GetExplodableObjects());
         }
         
         Destroy(cube.gameObject);

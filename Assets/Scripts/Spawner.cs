@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -17,18 +16,17 @@ public class Spawner : MonoBehaviour
     private float _newSplitChance;
     private float _newExplodeChance;
 
-    public void SpawnCubes()
+    public void SpawnCubes(Cube cube)
     {
         _cubesCount = Random.Range(_minValueCubeCount, _maxValueCubeCount);
-        _targetScale= _cube.Scale / _scaleReducer;
-        _newSplitChance = _cube.ValueSplitChance / _valueReducer;
-        _newExplodeChance = _cube.ValueExplodeChance / _valueReducer;
+        _targetScale= cube.Scale / _scaleReducer;
+        _newSplitChance = cube.ValueSplitChance / _valueReducer;
 
         for (int i = 0; i < _cubesCount; i++)
         {
-            Cube cubeClone = Instantiate(_cube, _cube.Position, Quaternion.identity);
+            Cube cubeClone = Instantiate(cube, cube.Position, Quaternion.identity);
             cubeClone.Init(_colorChanger.GenerateRandomColor(), _targetScale, _newSplitChance, _newExplodeChance);
-            _rigidbodies.Add(cubeClone.GetComponent<Rigidbody>());
+            _rigidbodies.Add(cubeClone.Rigidbody);
         }
     }
 
