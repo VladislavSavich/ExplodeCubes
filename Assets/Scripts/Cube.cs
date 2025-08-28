@@ -6,6 +6,7 @@ public class Cube : MonoBehaviour
 {
     private float _maximumValueChance = 100f;
     private float _minimumValueChance = 0f;
+    private Renderer _renderer;
     public float ValueSplitChance { get; private set; }
     public Rigidbody Rigidbody { get; private set; }
     public Color Color { get; private set; }
@@ -15,17 +16,18 @@ public class Cube : MonoBehaviour
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
+        _renderer = GetComponent<Renderer>();
     }
 
     private void Start()
-    {
-        GetComponent<Renderer>().material.color = Color;
+    {;
+        _renderer.material.color = Color;
 
         if (ValueSplitChance == _minimumValueChance)
             ValueSplitChance = _maximumValueChance;
     }
 
-    public void Init(Color color, Vector3 targetScale, float newSplitChance, float newExplodeChance)
+    public void Init(Color color, Vector3 targetScale, float newSplitChance)
     {
         Color = color;
         transform.localScale = targetScale;

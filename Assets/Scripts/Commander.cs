@@ -10,7 +10,6 @@ public class Commander : MonoBehaviour
     private float _valueDisappearingChance;
     private int _maxValueChance = 101;
     private int _minValueChance = 0;
-    public event Action CubeSplitted;
 
     private void OnEnable()
     {

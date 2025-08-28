@@ -14,7 +14,6 @@ public class Spawner : MonoBehaviour
     private int _maxValueCubeCount = 7;
     private float _valueReducer = 2f;
     private float _newSplitChance;
-    private float _newExplodeChance;
 
     public void SpawnCubes(Cube cube)
     {
@@ -25,7 +24,7 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < _cubesCount; i++)
         {
             Cube cubeClone = Instantiate(cube, cube.Position, Quaternion.identity);
-            cubeClone.Init(_colorChanger.GenerateRandomColor(), _targetScale, _newSplitChance, _newExplodeChance);
+            cubeClone.Init(_colorChanger.GenerateRandomColor(), _targetScale, _newSplitChance);
             _rigidbodies.Add(cubeClone.Rigidbody);
         }
     }
